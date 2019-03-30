@@ -1,0 +1,12 @@
+version: 2
+models:
+- name: test_2
+  description: 'TODO: Replace me'
+  columns:
+  - name: col_alpha
+  - name: col_beta
+- name: test
+  description: 'TODO: Replace me'
+  columns:
+  - name: col_a
+  - name: col_b

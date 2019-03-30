@@ -1,0 +1,7 @@
+version: 2
+models:
+- name: b
+  description: 'TODO: Replace me'
+  columns:
+  - name: city
+  - name: count

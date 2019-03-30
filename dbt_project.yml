@@ -1,0 +1,49 @@
+
+# Name your package! Package names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'my_new_package'
+version: '1.0'
+
+# This setting configures which "profile" dbt uses for this project. Profiles contain
+# database connection information, and should be configured in the  ~/.dbt/profiles.yml file
+profile: 'default'
+
+# These configurations specify where dbt should look for different types of files.
+# The `source-paths` config, for example, states that source models can be found
+# in the "models/" directory. You probably won't need to change these!
+source-paths: ["models"]
+analysis-paths: ["analysis"] 
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+    - "target"
+    - "dbt_modules"
+
+# You can define configurations for models in the `source-paths` directory here.
+# Using these configurations, you can enable or disable models, change how they
+# are materialized, and more!
+
+# In this example config, we tell dbt to build all models in the example/ directory
+# as views (the default). Try changing `view` to `table` below, then re-running dbt
+models:
+  my_new_package:
+      example:
+          materialized: ephemeral
+          schema: "example"
+      downstream:
+          materialized: ephemeral
+          schema: "downstream"
+
+
+archive:
+    - source_schema: analytics_example         # schema to look for tables in (declared below)
+      target_schema: dbt_archive             # where to archive the data to
+      tables:                                # list of tables to archive
+        - source_table: long_running                # table to archive (production_data.users)
+          target_table: long_running_archived       # table to insert archived data into (dbt_archive.users_archived)
+          updated_at: updated_at             # used to determine when data has changed
+          unique_key: name                     # used to generate archival query

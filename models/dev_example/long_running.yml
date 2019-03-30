@@ -1,0 +1,7 @@
+version: 2
+models:
+- name: long_running
+  description: 'TODO: Replace me'
+  columns:
+  - name: actor
+  - name: count
